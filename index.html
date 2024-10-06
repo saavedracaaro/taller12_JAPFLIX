@@ -30,6 +30,21 @@
     </div>
   </main>
 
+  <!-- Offcanvas para mostrar detalles de la película -->
+  <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasTopLabel">Título de la película</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <p id="movieOverview">Descripción de la película.</p>
+      <p><strong>Géneros:</strong> <span id="movieGenres"></span></p>
+      <ul id="additionalInfo">
+        <!-- Aquí se agregarán los detalles adicionales de la película -->
+      </ul>
+    </div>
+  </div>
+
   <footer class="text-muted py-3">
     <div class="container">
       <p class="float-end mb-1">

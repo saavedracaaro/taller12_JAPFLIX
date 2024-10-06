@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
       .catch(error => console.error("Error al obtener las películas:", error));
 });  // Fetch que obtiene la info del URL al cargar la página
 
-
 // Mostrar las estrellas según el puntaje
 function mostrarPuntaje(vote_average) {
     const maxStars = 5; // Puntaje máximo: 5 estrellas
@@ -53,6 +52,9 @@ function buscarPeliculas() {
           <div>${mostrarPuntaje(pelicula.vote_average)}</div>
         `;
 
+        // Agregar evento click para mostrar más información en el offcanvas
+        item.addEventListener("click", () => mostrarInfoPelicula(pelicula));
+
         lista.appendChild(item);
       });
 
@@ -63,6 +65,28 @@ function buscarPeliculas() {
         lista.appendChild(item);
       }
     }
+}
+
+// Función para mostrar la información de la película en el offcanvas
+function mostrarInfoPelicula(pelicula) {
+  // Llenar los campos del offcanvas con la información de la película seleccionada
+  document.getElementById('offcanvasTopLabel').innerText = pelicula.title;
+  document.getElementById('movieOverview').innerText = pelicula.overview || "Sin descripción disponible.";
+
+  // Crear una lista de géneros y mostrarla
+  const genres = pelicula.genres.join(' - ');
+  document.getElementById('movieGenres').innerText = genres;
+
+  // Llenar el desplegable con información adicional (aquí ajusta los valores como consideres)
+  const additionalInfo = document.getElementById('additionalInfo');
+  additionalInfo.innerHTML = `
+    <li><span class="dropdown-item">Year: ${new Date(pelicula.release_date).getFullYear()}</span></li>
+    <li><span class="dropdown-item">Runtime: ${pelicula.runtime || "Desconocido"} mins</span></li>
+  `;
+
+  // Mostrar el offcanvas usando Bootstrap
+  const offcanvasElement = new bootstrap.Offcanvas(document.getElementById('offcanvasTop'));
+  offcanvasElement.show();
 }
 
 // Agregar evento al botón de búsqueda
